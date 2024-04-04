@@ -1,8 +1,9 @@
 const express=require('express');
 const port=8000;
-
+var cors = require('cors');
 const app=express();
 app.use(express.urlencoded());
+app.use(cors());
 
 app.listen(port,(err)=>{
     if(err){
@@ -36,4 +37,8 @@ app.get('/arrange',(req,res)=>{
 app.get('/restart',(req,res)=>{
    arr=[];
    res.send(arr);
+});
+
+app.get('/getarray',(req,res)=>{
+    res.send(arr);
 })
