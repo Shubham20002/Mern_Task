@@ -4,6 +4,7 @@ var cors = require('cors');
 const app=express();
 app.use(express.urlencoded());
 app.use(cors());
+app.use(express.json());
 
 app.listen(port,(err)=>{
     if(err){
@@ -17,14 +18,15 @@ app.listen(port,(err)=>{
 var arr=[];
 
 app.post('/addnumber',(req,res)=>{
-    console.log(req.body.number);
+    console.log(req.body);
     arr.push(req.body.number);
   res.send(arr);
 });
 
-app.get('/arrange',(req,res)=>{
-    console.log(req.body.assending);
-    if(req.body.assending==="true"){
+app.post('/arrange',(req,res)=>{
+    console.log(req.body);
+    if(req.body.assending===true){
+        console.log("true");
         arr.sort(function (a, b) { return a - b });
     }
     else{
