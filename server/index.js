@@ -13,7 +13,7 @@ app.listen(port,(err)=>{
     }
 });
 
-const arr=[];
+var arr=[];
 
 app.post('/addnumber',(req,res)=>{
     console.log(req.body.number);
@@ -32,3 +32,8 @@ app.get('/arrange',(req,res)=>{
     
     res.send(arr);
 });
+
+app.get('/restart',(req,res)=>{
+   arr=[];
+   res.send(arr);
+})
