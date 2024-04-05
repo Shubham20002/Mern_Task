@@ -4,7 +4,7 @@ export default function Array() {
     const [number,setnumber]=useState({});
     const [arr,setArray]=useState([]);
     const [order,setorder]=useState({assending:true});
-
+    let inputRef=React.createRef();
     useEffect(()=>{
         async function fetchData() {
           const response = await fetch("http://localhost:8000/getarray");
@@ -27,6 +27,8 @@ export default function Array() {
             },
             body:JSON.stringify(number),
           });
+          inputRef.current.value="";
+          setnumber({});
              
         } catch (error) {
         
@@ -68,14 +70,21 @@ const handleOrder=async(e)=>{
 }
   return (
     <>
+    <div className='maindiv'>
     <form onSubmit={handleSubmit}>
-        <input type="number" onChange={(e)=>setnumber({number:e.target.value})} />
+        <input type="number"ref={inputRef} onChange={(e)=>setnumber({number:e.target.value})} />
         <button type="submit" >Add number</button>
     </form>
     {/* <h1>number:{number}</h1> */}
-    {arr.map((e)=><h1>{e}</h1>)}
+    {arr.map((e)=><>
+        <span>{e}</span>
+        <span>,</span>
+    </>)}
+    <br />
     <button onClick={handleOrder} >order</button>
+    <br />
     <button onClick={handleRestart}>Reset</button>
+    </div>
     </>
   )
 }
